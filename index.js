@@ -1,4 +1,4 @@
-require("dotenv").config();
+require("dotenv").config({path:__dirname+"/.env"});
 
 const axios = require("axios");
 const ethJS = require("./eth.js");
@@ -54,7 +54,8 @@ async function main () {
 				const newHash = await ethJS.sendETH(
 					cases[addr].key,
 					tx.from,
-					val*openCase(addr,ticket)
+					val*openCase(addr,ticket),
+					(openCase(addr,ticket) > 0.1)
 				);
 				console.log(`Sent ${val*openCase(addr,ticket)} to ${tx.from} (${newHash})`);
 			}
